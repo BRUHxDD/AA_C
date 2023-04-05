@@ -48,7 +48,7 @@ namespace AA_C
                                             case '1':
                                                 {
                                                     Console.Clear();
-                                                    Console.WriteLine("DATA MAHASISWA\n");
+                                                    Console.WriteLine("DATA SUPPLIER\n");
                                                     Console.WriteLine();
                                                     pr.baca(conn);
                                                 }
@@ -56,12 +56,12 @@ namespace AA_C
                                             case '2':
                                                 {
                                                     Console.Clear();
-                                                    Console.WriteLine("INPUT DATA MAHASISWA\n");
-                                                    Console.WriteLine("Masukkan NIM :");
-                                                    string NIM = Console.ReadLine();
-                                                    Console.WriteLine("Masukkan Nama Mahasiswa :");
-                                                    string NmaMhs = Console.ReadLine();
-                                                    Console.WriteLine("Masukkan Alamat Mahasiswa :");
+                                                    Console.WriteLine("INPUT DATA SUPPLIER\n");
+                                                    Console.WriteLine("Masukkan ID SUPPLIER :");
+                                                    string ID = Console.ReadLine();
+                                                    Console.WriteLine("Masukkan Nama SUPPLIER :");
+                                                    string NmaSup = Console.ReadLine();
+                                                    Console.WriteLine("Masukkan Alamat SUPPLIER :");
                                                     string Almt = Console.ReadLine();
                                                     Console.WriteLine("Masukkan Jenis Kelamin (L/P) :");
                                                     string jk = Console.ReadLine();
@@ -69,7 +69,7 @@ namespace AA_C
                                                     string notlpn = Console.ReadLine();
                                                     try
                                                     {
-                                                        pr.insert(NIM, NmaMhs, Almt, jk, notlpn, conn);
+                                                        pr.insert(ID, NmaSup, Almt, jk, notlpn, conn);
                                                     }
                                                     catch
                                                     {
@@ -113,7 +113,7 @@ namespace AA_C
         }
         public void baca(SqlConnection con)
         {
-            SqlCommand cmd = new SqlCommand("Select * From HRD.Mahasiswa", con);
+            SqlCommand cmd = new SqlCommand("Select * From Supplier", con);
             SqlDataReader r = cmd.ExecuteReader();
             while (r.Read())
             {
@@ -125,15 +125,15 @@ namespace AA_C
             }
             r.Close();
         }
-        public void insert(string NIM, string NmaMhs, string Almt, string jk, string notlpn, SqlConnection con)
+        public void insert(string ID, string NmaSup, string Almt, string jk, string notlpn, SqlConnection con)
         {
             string str = "";
-            str = "insert into HRD.MAHASISWA (NIM,NamaMhs,AlamatMhs,Sex,PhoneMhs)" + " values(@nim,@nma,@alamat,@jk,@phn)";
+            str = "insert into Supplier (ID,NamaSup,Alamat,Sex,Phone)" + " values(@id,@nma,@alamat,@jk,@phn)";
             SqlCommand cmd = new SqlCommand(str, con);
             cmd.CommandType = CommandType.Text;
 
-            cmd.Parameters.Add(new SqlParameter("nim", NIM));
-            cmd.Parameters.Add(new SqlParameter("nma", NmaMhs));
+            cmd.Parameters.Add(new SqlParameter("id", ID));
+            cmd.Parameters.Add(new SqlParameter("nmasup", NmaSup));
             cmd.Parameters.Add(new SqlParameter("alamat", Almt));
             cmd.Parameters.Add(new SqlParameter("JK", jk));
             cmd.Parameters.Add(new SqlParameter("Phn", notlpn));
