@@ -73,8 +73,8 @@ namespace AA_C
                                                     }
                                                     catch
                                                     {
-                                                        Console.WriteLine("\nAnda tidak memiliki " +
-                                                            "akses untuk menambah data");
+                                                        pr.baca(conn);
+                                                        Console.ReadLine();
                                                     }
                                                 }
                                                 break;
@@ -128,15 +128,15 @@ namespace AA_C
         public void insert(string ID, string NmaSup, string Almt, string jk, string notlpn, SqlConnection con)
         {
             string str = "";
-            str = "insert into Supplier (ID,NamaSup,Alamat,Sex,Phone)" + " values(@id,@nma,@alamat,@jk,@phn)";
+            str = "insert into Supplier (ID,NamaSup,Alamat,Sex,Phone)" + " values(@ID,@NmaSup,@Alamat,@jk,@phn)";
             SqlCommand cmd = new SqlCommand(str, con);
             cmd.CommandType = CommandType.Text;
 
-            cmd.Parameters.Add(new SqlParameter("id", ID));
-            cmd.Parameters.Add(new SqlParameter("nmasup", NmaSup));
-            cmd.Parameters.Add(new SqlParameter("alamat", Almt));
-            cmd.Parameters.Add(new SqlParameter("JK", jk));
-            cmd.Parameters.Add(new SqlParameter("Phn", notlpn));
+            cmd.Parameters.Add(new SqlParameter("ID", ID));
+            cmd.Parameters.Add(new SqlParameter("NmaSup", NmaSup));
+            cmd.Parameters.Add(new SqlParameter("Alamat", Almt));
+            cmd.Parameters.Add(new SqlParameter("jk", jk));
+            cmd.Parameters.Add(new SqlParameter("phn", notlpn));
             cmd.ExecuteNonQuery();
             Console.WriteLine("Data Berhasil Ditambahkan");
         }
